@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -9,14 +10,33 @@ export const Container = styled.div`
   max-width: 1140px;
 `;
 
+export const Header = styled.header`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0 30px;
+  width: 100%;
+  max-width: 1140px;
+
+  @media screen and (min-width: 768px) {
+    flex-wrap: nowrap;
+  }
+`;
+
 export const Title = styled.h1`
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 80px;
+  font-size: 40px;
   color: #fff;
+  margin-top: 30px;
+  margin-bottom: 30px;
   text-align: center;
   width: 100%;
-  margin-top: 20px;
-  margin-bottom: 40px;
+
+  @media screen and (min-width: 768px) {
+    text-align: left;
+  }
 `;
 
 export const RefreshButton = styled.button`

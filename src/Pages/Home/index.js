@@ -9,7 +9,7 @@ import Loading from "../../Components/Loading";
 import Form from "../../Components/Form";
 import Card from "../../Components/Card";
 
-import { Container, Title, RefreshButton } from "./styles";
+import { Container, Header, Title, RefreshButton } from "./styles";
 
 export default function Home() {
   const [infos, setInfos] = useState([]);
@@ -61,30 +61,29 @@ export default function Home() {
 
   return (
     <>
-      <Title>Corona Viewrus</Title>
-
-      <Form handleSubmit={handleSubmit} ref={inputRef} />
+      <Header>
+        <Title>Corona Viewrus</Title>
+        <Form handleSubmit={handleSubmit} ref={inputRef} />
+      </Header>
 
       {loading && <Loading />}
 
       <Container>
-        {filteredInfo &&
-          filteredInfo.map((info, key) => (
-            <Card
-              className="filtered"
-              key={info.uid + key + ""}
-              title={info.state}
-              broadcast={info.broadcast}
-              cases={info.cases}
-              deaths={info.deaths}
-              suspects={info.suspects}
-              refuses={info.refuses}
-            />
-          ))}
+        {filteredInfo?.map((info, key) => (
+          <Card
+            className="filtered"
+            key={info.uid + key + ""}
+            title={info.state}
+            broadcast={info.broadcast}
+            cases={info.cases}
+            deaths={info.deaths}
+            suspects={info.suspects}
+            refuses={info.refuses}
+          />
+        ))}
+
         {!filteredInfo.length &&
-          infos &&
-          infos.brazil &&
-          infos.brazil.values.map((info, key) => (
+          infos?.brazil?.values.map((info, key) => (
             <Card
               key={info.uid + key + ""}
               title={info.state}
