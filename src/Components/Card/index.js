@@ -12,13 +12,14 @@ import {
 
 export default function Card({
   title = "Não informado",
+  broadcast = false,
   cases = "-",
   deaths = "-",
   suspects = "-",
   refuses = "-",
 }) {
   return (
-    <CardWrapper>
+    <CardWrapper className={broadcast ? "-live-on" : "-live-off"}>
       <CardItem>
         <CardItem>
           <CardTitle>{title}</CardTitle>

@@ -41,6 +41,7 @@ export default function Home() {
           <Card
             key={info.uid + key + ""}
             title={info.state}
+            broadcast={info.broadcast}
             cases={info.cases}
             deaths={info.deaths}
             suspects={info.suspects}
