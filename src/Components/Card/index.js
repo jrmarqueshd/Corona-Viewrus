@@ -17,11 +17,12 @@ export default function Card({
   deaths = "-",
   suspects = "-",
   refuses = "-",
+  className,
 }) {
   return (
     <CardWrapper className={broadcast ? "-live-on" : "-live-off"}>
-      <CardItem>
-        <CardItem>
+      <CardItem className={className}>
+        <CardItem className={className}>
           <CardTitle>{title}</CardTitle>
           <InfosWrapper>
             <EachInfo>

@@ -87,10 +87,14 @@ export const CardWrapper = styled.div`
 
 export const CardItem = styled.div`
   box-sizing: border-box;
-  background-color: #eee;
+  background-color: #ccc;
   border-radius: 15px;
   padding: 15px;
   width: 100%;
+
+  &.filtered {
+    background-color: #eee;
+  }
 `;
 
 export const CardTitle = styled.h2`
