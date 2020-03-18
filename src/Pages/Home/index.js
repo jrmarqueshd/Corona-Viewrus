@@ -56,7 +56,6 @@ export default function Home() {
         arrInfos.push(info);
       }
     });
-
     setFilteredInfo(arrInfos);
   }
 
