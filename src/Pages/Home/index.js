@@ -5,20 +5,11 @@ import { FiRefreshCw } from "react-icons/fi";
 import { fetchVirusInfo } from "../../Services/Api/CoronaAnalytic/Requests";
 import { fetchGlobalInfos } from "../../Services/Api/CoronaCoutries/Requests";
 
+import Loading from "../../Components/Loading";
+import Form from "../../Components/Form";
 import Card from "../../Components/Card";
 
-import {
-  Container,
-  Title,
-  Form,
-  SearchInput,
-  Button,
-  RefreshButton,
-  LoadingWrapper,
-  Loading,
-} from "./styles";
-
-import darkLoading from "../../Assets/Images/loading-dark.gif";
+import { Container, Title, RefreshButton } from "./styles";
 
 export default function Home() {
   const [infos, setInfos] = useState([]);
@@ -55,6 +46,9 @@ export default function Home() {
     e.preventDefault();
 
     let inputRefValue = inputRef.current.value;
+
+    console.log(inputRefValue);
+
     let arrInfos = [];
 
     infos.brazil.values.map(info => {
@@ -70,18 +64,11 @@ export default function Home() {
     <>
       <Title>Corona Viewrus</Title>
 
-      <Form onSubmit={handleSubmit}>
-        <SearchInput ref={inputRef} type="search" />
-        <Button>Buscar</Button>
-      </Form>
+      <Form handleSubmit={handleSubmit} ref={inputRef} />
+
+      {loading && <Loading />}
 
       <Container>
-        {loading && (
-          <LoadingWrapper>
-            <Loading src={darkLoading} />{" "}
-          </LoadingWrapper>
-        )}
-
         {filteredInfo &&
           filteredInfo.map((info, key) => (
             <Card
