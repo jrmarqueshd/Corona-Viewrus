@@ -81,7 +81,6 @@ export default function Home() {
               refuses={info.refuses}
             />
           ))}
-
         {!filteredInfo.length &&
           infos &&
           infos.brazil &&

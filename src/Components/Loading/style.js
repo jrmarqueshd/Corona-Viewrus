@@ -28,7 +28,6 @@ export const LoadingWrapper = styled.div`
         transform: rotate(-360deg);
       }
     }
-
     &.-animated {
       animation: rotateLoading 3s ease-in-out infinite;
       opacity: 0.8;

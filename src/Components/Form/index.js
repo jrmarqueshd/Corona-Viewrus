@@ -10,5 +10,4 @@ const Form = forwardRef(({ handleSubmit }, ref) => {
     </FormWrapper>
   );
 });
-
 export default Form;

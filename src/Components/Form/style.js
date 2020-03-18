@@ -9,7 +9,6 @@ export const FormWrapper = styled.form`
   width: 100%;
   max-width: 1140px;
 `;
-
 export const SearchInput = styled.input`
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;

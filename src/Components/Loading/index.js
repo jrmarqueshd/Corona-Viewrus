@@ -1,7 +1,6 @@
 import React from "react";
 
 import { AiOutlineLoading, AiOutlineLoading3Quarters } from "react-icons/ai";
-
 import { LoadingWrapper } from "./style";
 
 export default function Loading() {
