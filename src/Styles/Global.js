@@ -6,6 +6,7 @@ const Global = createGlobalStyle`
     margin: 0;
     box-sizing: border-box !important;
     outline: transparent;
+    font-family: Arial, Helvetica, sans-serif;
   }
 
   body{

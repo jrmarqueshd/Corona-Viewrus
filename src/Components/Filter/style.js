@@ -1,10 +1,17 @@
 import styled from "styled-components";
 
 export const FilterWrapper = styled.div`
-  margin: 0 auto;
+  margin: 20px auto 15px;
   padding: 0 30px;
   width: 100%;
   max-width: 1140px;
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    text-align: left;
+    padding-left: 15px;
+    margin: 0;
+  }
 `;
 
 export const Option = styled.div`
@@ -35,5 +42,9 @@ export const Option = styled.div`
     &::before {
       background-color: #8140ff;
     }
+  }
+
+  @media screen and (min-width: 768px) {
+    margin-top: 0;
   }
 `;

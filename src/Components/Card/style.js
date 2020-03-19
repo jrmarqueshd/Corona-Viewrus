@@ -83,6 +83,10 @@ export const CardWrapper = styled.div`
     flex: 1;
     min-width: 340px;
   }
+
+  @media screen and (min-width: 1140px) {
+    max-width: 340px;
+  }
 `;
 
 export const CardItem = styled.div`

@@ -10,7 +10,14 @@ import Filter from "../../Components/Filter";
 import Form from "../../Components/Form";
 import Card from "../../Components/Card";
 
-import { Container, Header, Title, RefreshButton } from "./styles";
+import {
+  Container,
+  FlexContainer,
+  Header,
+  Title,
+  Status,
+  RefreshButton,
+} from "./styles";
 
 export default function Home() {
   const [infos, setInfos] = useState([]);
@@ -98,14 +105,22 @@ export default function Home() {
         <Form handleSubmit={handleSubmit} ref={inputRef} />
       </Header>
 
-      <Filter handleChange={handleChangeFilter} active={filterActive} />
+      <FlexContainer>
+        <Filter handleChange={handleChangeFilter} active={filterActive} />
+
+        {infos?.brazil && (
+          <Status>
+            Atualizado em <strong>{infos.brazil?.date}</strong> ás{" "}
+            <strong>{infos.brazil?.time}</strong>
+          </Status>
+        )}
+      </FlexContainer>
 
       {loading && <Loading />}
 
       <Container>
         {filteredInfo?.map((info, key) => (
           <Card
-            className="filtered"
             key={
               info.uid +
               key +

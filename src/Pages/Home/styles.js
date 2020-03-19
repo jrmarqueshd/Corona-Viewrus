@@ -10,6 +10,39 @@ export const Container = styled.div`
   max-width: 1140px;
 `;
 
+export const FlexContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 15px auto 0;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%;
+  max-width: 1140px;
+
+  @media screen and (min-width: 768px) {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+`;
+
+export const Status = styled.p`
+  font-size: 12px;
+  color: #fff;
+  margin: 15px auto 0;
+  padding-left: 30px;
+  padding-right: 30px;
+  text-align: right;
+  width: 100%;
+  max-width: 1140px;
+
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+    margin-top: 0;
+  }
+`;
+
 export const Header = styled.header`
   display: flex;
   justify-content: space-between;
