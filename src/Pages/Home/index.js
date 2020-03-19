@@ -6,6 +6,7 @@ import { fetchVirusInfo } from "../../Services/Api/CoronaAnalytic/Requests";
 import { fetchGlobalInfos } from "../../Services/Api/CoronaCoutries/Requests";
 
 import Loading from "../../Components/Loading";
+import Filter from "../../Components/Filter";
 import Form from "../../Components/Form";
 import Card from "../../Components/Card";
 
@@ -17,6 +18,7 @@ export default function Home() {
   const [globalInfos, setGlobalInfos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [refresh, setRefresh] = useState(false);
+  const [filterActive, setFilterActive] = useState("");
 
   const inputRef = useRef(null);
 
@@ -37,6 +39,36 @@ export default function Home() {
     fetchData();
     setRefresh(false);
   }, [refresh === true]);
+
+  function _changeOrderCards(order) {
+    switch (order) {
+      case "az":
+        console.log(infos.brazil.values);
+        setFilteredInfo(
+          infos.brazil.values.sort((a, b) => (a.state > b.state ? 1 : -1))
+        );
+        break;
+      case "cases":
+        console.log(infos.brazil.values);
+        setFilteredInfo(
+          infos.brazil.values.sort((a, b) => (a.cases < b.cases ? 1 : -1))
+        );
+        break;
+      case "deaths":
+        console.log(infos.brazil.values);
+        setFilteredInfo(
+          infos.brazil.values.sort((a, b) => (a.deaths < b.deaths ? 1 : -1))
+        );
+        break;
+      default:
+        break;
+    }
+  }
+
+  function handleChangeFilter({ currentTarget: { id } }) {
+    setFilterActive(id);
+    _changeOrderCards(id);
+  }
 
   function handleRefresh() {
     setRefresh(true);
@@ -66,13 +98,20 @@ export default function Home() {
         <Form handleSubmit={handleSubmit} ref={inputRef} />
       </Header>
 
+      <Filter handleChange={handleChangeFilter} active={filterActive} />
+
       {loading && <Loading />}
 
       <Container>
         {filteredInfo?.map((info, key) => (
           <Card
             className="filtered"
-            key={info.uid + key + ""}
+            key={
+              info.uid +
+              key +
+              crypto.getRandomValues(new Uint32Array(1))[0] +
+              ""
+            }
             title={info.state}
             broadcast={info.broadcast}
             cases={info.cases}
@@ -85,7 +124,12 @@ export default function Home() {
         {!filteredInfo.length &&
           infos?.brazil?.values.map((info, key) => (
             <Card
-              key={info.uid + key + ""}
+              key={
+                info.uid +
+                key +
+                crypto.getRandomValues(new Uint32Array(1))[0] +
+                ""
+              }
               title={info.state}
               broadcast={info.broadcast}
               cases={info.cases}
