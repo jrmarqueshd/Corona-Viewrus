@@ -1,5 +1,8 @@
 import React from "react";
 
+import { FaBriefcaseMedical } from "react-icons/fa";
+import { GiDeathSkull } from "react-icons/gi";
+
 import { FilterWrapper, Option } from "./style";
 
 const optionsTemplate = [
@@ -9,11 +12,13 @@ const optionsTemplate = [
   },
   {
     id: "cases",
-    label: "> Casos",
+    icon: <FaBriefcaseMedical />,
+    label: "Casos",
   },
   {
     id: "deaths",
-    label: "> Mortes",
+    icon: <GiDeathSkull />,
+    label: "Mortes",
   },
 ];
 
@@ -27,7 +32,7 @@ const Filter = ({ handleChange, active }) => {
           onClick={handleChange}
           className={active === option.id ? "-selected" : ""}
         >
-          {option.label}
+          {option.icon} {option.label}
         </Option>
       ))}
     </FilterWrapper>
