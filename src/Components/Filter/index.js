@@ -1,14 +1,16 @@
 import React from "react";
 
 import { FaBriefcaseMedical } from "react-icons/fa";
-import { GiDeathSkull } from "react-icons/gi";
+import { GiDeathSkull, GiMedicines } from "react-icons/gi";
+import { TiSortAlphabeticallyOutline } from "react-icons/ti";
 
 import { FilterWrapper, Option } from "./style";
 
 const optionsTemplate = [
   {
     id: "az",
-    label: "A-Z",
+    icon: <TiSortAlphabeticallyOutline />,
+    label: "A à Z",
   },
   {
     id: "cases",
@@ -22,19 +24,39 @@ const optionsTemplate = [
   },
 ];
 
-const Filter = ({ handleChange, active }) => {
+const optionsTemplateCountries = [
+  ...optionsTemplate,
+  {
+    id: "recovered",
+    icon: <GiMedicines />,
+    label: "Curados",
+  },
+];
+
+const Filter = ({ handleChange, active, countries }) => {
   return (
     <FilterWrapper>
-      {optionsTemplate.map(option => (
-        <Option
-          key={option.id}
-          id={option.id}
-          onClick={handleChange}
-          className={active === option.id ? "-selected" : ""}
-        >
-          {option.icon} {option.label}
-        </Option>
-      ))}
+      {countries
+        ? optionsTemplateCountries.map(option => (
+            <Option
+              key={option.id}
+              id={option.id}
+              onClick={handleChange}
+              className={active === option.id ? "-selected" : ""}
+            >
+              {option.icon} {option.label}
+            </Option>
+          ))
+        : optionsTemplate.map(option => (
+            <Option
+              key={option.id}
+              id={option.id}
+              onClick={handleChange}
+              className={active === option.id ? "-selected" : ""}
+            >
+              {option.icon} {option.label}
+            </Option>
+          ))}
     </FilterWrapper>
   );
 };

@@ -21,6 +21,7 @@ export const Option = styled.div`
   padding-left: 20px;
   color: #fff;
   font-family: Arial, Helvetica, sans-serif;
+  cursor: pointer;
 
   &:not(:first-child) {
     margin-left: 15px;
