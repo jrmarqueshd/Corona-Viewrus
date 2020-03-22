@@ -8,6 +8,7 @@ import { FiRefreshCw } from "react-icons/fi";
 import {
   fetchGlobalInfo,
   fetchGlobalShortInfos,
+  fetchResumeTotalsInfo,
 } from "../../Services/Api/CoronaCoutries/Requests";
 
 import Loading from "../../Components/Loading";
@@ -24,12 +25,13 @@ import {
   FlexContainer,
   Header,
   Title,
-  Status,
   RefreshButton,
 } from "./styles";
+import ResumeCases from "../../Components/ResumeCases";
 
 export default function Home() {
   const [infos, setInfos] = useState([]);
+  const [resumeTotalsInfos, setResumeTotalsInfos] = useState([]);
   const [detailsInfo, setDetailsInfo] = useState({});
   const [filteredInfo, setFilteredInfo] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -46,7 +48,8 @@ export default function Home() {
     setLoading(true);
     fetchData();
     setRefresh(false);
-    // handleReminderVideo();
+    fetchResumeTotals();
+    handleReminderVideo();
   }, [refresh]);
 
   async function fetchData() {
@@ -71,6 +74,11 @@ export default function Home() {
     setThisTitle(country);
 
     setLoadingModal(false);
+  }
+
+  async function fetchResumeTotals() {
+    const responseResumeTotalsInfo = await fetchResumeTotalsInfo();
+    setResumeTotalsInfos(responseResumeTotalsInfo);
   }
 
   function _changeOrderCards(order) {
@@ -102,6 +110,7 @@ export default function Home() {
       default:
         break;
     }
+    // setLoading(false); //remove event vinculed on search click
   }
 
   function _searchCountry() {
@@ -193,11 +202,8 @@ export default function Home() {
           countries={true}
         />
 
-        {infos?.brazil && (
-          <Status>
-            Atualizado em <strong>{infos.brazil?.date}</strong> ás{" "}
-            <strong>{infos.brazil?.time}</strong>
-          </Status>
+        {resumeTotalsInfos.length !== 0 && (
+          <ResumeCases data={resumeTotalsInfos} />
         )}
       </FlexContainer>
 

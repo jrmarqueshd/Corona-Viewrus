@@ -7,7 +7,7 @@ import { FormWrapper, SearchInput, Button } from "./style";
 const Form = forwardRef(({ handleSubmit }, ref) => {
   return (
     <FormWrapper onSubmit={handleSubmit}>
-      <SearchInput placeholder="Pesquisar por estado" ref={ref} type="search" />
+      <SearchInput placeholder="Pesquisar por país" ref={ref} type="search" />
       <Button>
         <FaSearch />
       </Button>

@@ -21,7 +21,7 @@ export const FlexContainer = styled.div`
   max-width: 1140px;
 
   @media screen and (min-width: 768px) {
-    flex-wrap: nowrap;
+    /* flex-wrap: nowrap; */
     justify-content: space-between;
     margin-bottom: 15px;
   }

@@ -5,6 +5,11 @@ export async function fetchGlobalShortInfos() {
   return response.data;
 }
 
+export async function fetchResumeTotalsInfo() {
+  const response = await CountriesAPISummary.get("/totals");
+  return response.data;
+}
+
 export async function fetchGlobalInfo(country) {
   const response = await CountriesAPI.get("/countries/" + country);
   return response.data;
