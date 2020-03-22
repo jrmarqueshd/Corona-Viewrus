@@ -46,7 +46,7 @@ export default function Home() {
     setLoading(true);
     fetchData();
     setRefresh(false);
-    handleReminderVideo();
+    // handleReminderVideo();
   }, [refresh]);
 
   async function fetchData() {

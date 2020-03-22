@@ -3,8 +3,6 @@ import React from "react";
 import Modal from "react-modal";
 import ReactPlayer from "react-player";
 
-import Loading from "../Loading";
-
 const customStyles = {
   content: {
     top: "50%",
@@ -29,6 +27,7 @@ export default function VideoModal({ open, close }) {
       overlayClassName="Overlay"
     >
       <ReactPlayer
+        style={{ minWidth: "375px", minHeigth: "300px" }}
         width="100%"
         height="auto"
         url="https://www.youtube.com/watch?v=h8OX0FNWANM"

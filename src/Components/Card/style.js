@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CardWrapper = styled.div`
+export const CardWrapper = styled.section`
   display: flex;
   justify-content: space-between;
   font-family: Arial, Helvetica, sans-serif;

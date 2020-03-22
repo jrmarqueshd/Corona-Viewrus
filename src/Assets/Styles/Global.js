@@ -22,6 +22,17 @@ const Global = createGlobalStyle`
     bottom: 0;
     position: fixed;
   }
+
+  .ReactModal__Content{
+    & > div {
+      height: 330px !important;
+
+      @media screen and (min-width: 768px){
+        height: 430px !important;
+        min-width: 767px !important;
+      }
+    }
+  }
 `;
 
 export default Global;
