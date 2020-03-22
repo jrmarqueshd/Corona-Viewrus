@@ -45,6 +45,10 @@ export default function Home() {
   const inputRef = useRef(null);
 
   useEffect(() => {
+    getGeolocation();
+  }, []);
+
+  useEffect(() => {
     setLoading(true);
     fetchData();
     setRefresh(false);
@@ -79,6 +83,18 @@ export default function Home() {
   async function fetchResumeTotals() {
     const responseResumeTotalsInfo = await fetchResumeTotalsInfo();
     setResumeTotalsInfos(responseResumeTotalsInfo);
+  }
+
+  function getGeolocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log(position);
+      });
+      console.log("autorizado");
+    } else {
+      // x.innerHTML = "Geolocation is not supported by this browser.";
+      console.log("não autorizado");
+    }
   }
 
   function _changeOrderCards(order) {
