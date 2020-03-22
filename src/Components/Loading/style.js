@@ -4,7 +4,16 @@ export const LoadingWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin: 30px auto 0;
-  height: 100px;
+  min-height: 150px;
+  position: relative;
+  width: 100%;
+  min-width: 150px;
+
+  &.purple {
+    svg {
+      color: #8140ff;
+    }
+  }
 
   svg {
     color: white;

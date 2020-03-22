@@ -12,6 +12,16 @@ const Global = createGlobalStyle`
   body{
     background-color: #8140ff;
   }
+
+  .ReactModal__Overlay {
+    background-color: rgba(0,0,0,0.85) !important;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+  }
 `;
 
 export default Global;

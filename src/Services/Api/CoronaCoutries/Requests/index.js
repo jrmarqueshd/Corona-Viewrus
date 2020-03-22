@@ -1,13 +1,11 @@
-import CountriesAPI from "../index";
+import CountriesAPI, { CountriesAPISummary } from "../index";
 
-export async function fetchGlobalInfos() {
-  const response = await CountriesAPI.get("/countries");
-
+export async function fetchGlobalShortInfos() {
+  const response = await CountriesAPISummary.get("/countries");
   return response.data;
 }
 
-export async function fetchGlobalShortInfos() {
-  const response = await CountriesAPI.get();
-
+export async function fetchGlobalInfo(country) {
+  const response = await CountriesAPI.get("/countries/" + country);
   return response.data;
 }

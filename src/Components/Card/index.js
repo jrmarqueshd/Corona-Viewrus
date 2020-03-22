@@ -8,30 +8,36 @@ import {
   EachInfo,
   Infos,
   InfosLabel,
+  DetailsButton,
 } from "./style";
 
 export default function Card({
   title = "Não informado",
-  broadcast = false,
-  cases = "-",
+  favorite = false,
+  cases = "",
   todayCases = "",
-  deaths = "-",
+  deaths = "",
   todayDeaths = "",
-  suspects = "-",
-  refuses = "-",
+  suspects = "",
+  refuses = "",
   recovered = "",
+  critical = "",
+  hiddenDetails = false,
   className,
+  onClick,
 }) {
   return (
-    <CardWrapper className={broadcast ? "-live-on" : "-live-off"}>
+    <CardWrapper className={`${favorite ? "-live-on" : "-live-off"}`}>
       <CardItem className={className}>
         <CardItem className={className}>
           <CardTitle>{title}</CardTitle>
           <InfosWrapper>
-            <EachInfo>
-              <InfosLabel>Casos</InfosLabel>
-              <Infos>{cases}</Infos>
-            </EachInfo>
+            {cases && (
+              <EachInfo>
+                <InfosLabel>Casos</InfosLabel>
+                <Infos>{cases}</Infos>
+              </EachInfo>
+            )}
 
             {todayCases !== "" && (
               <EachInfo>
@@ -40,10 +46,12 @@ export default function Card({
               </EachInfo>
             )}
 
-            <EachInfo>
-              <InfosLabel>Mortes</InfosLabel>
-              <Infos>{deaths}</Infos>
-            </EachInfo>
+            {deaths !== "" && (
+              <EachInfo>
+                <InfosLabel>Mortes</InfosLabel>
+                <Infos>{deaths}</Infos>
+              </EachInfo>
+            )}
 
             {todayDeaths !== "" && (
               <EachInfo>
@@ -52,15 +60,19 @@ export default function Card({
               </EachInfo>
             )}
 
-            <EachInfo>
-              <InfosLabel>Suspeitas</InfosLabel>
-              <Infos>{suspects}</Infos>
-            </EachInfo>
+            {suspects !== "" && (
+              <EachInfo>
+                <InfosLabel>Suspeitas</InfosLabel>
+                <Infos>{suspects}</Infos>
+              </EachInfo>
+            )}
 
-            <EachInfo>
-              <InfosLabel>Recusas</InfosLabel>
-              <Infos>{refuses}</Infos>
-            </EachInfo>
+            {refuses !== "" && (
+              <EachInfo>
+                <InfosLabel>Recusas</InfosLabel>
+                <Infos>{refuses}</Infos>
+              </EachInfo>
+            )}
 
             {recovered !== "" && (
               <EachInfo>
@@ -68,8 +80,18 @@ export default function Card({
                 <Infos>{recovered}</Infos>
               </EachInfo>
             )}
+
+            {critical !== "" && (
+              <EachInfo>
+                <InfosLabel>Casos de entubamentos</InfosLabel>
+                <Infos>{critical}</Infos>
+              </EachInfo>
+            )}
           </InfosWrapper>
         </CardItem>
+        {!hiddenDetails && (
+          <DetailsButton onClick={onClick}>Mais detalhes</DetailsButton>
+        )}
       </CardItem>
     </CardWrapper>
   );

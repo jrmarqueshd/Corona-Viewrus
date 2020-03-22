@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 
 import { FiRefreshCw } from "react-icons/fi";
 
-import { fetchGlobalInfo } from "../../Services/Api/CoronaCoutries/Requests";
+import { fetchVirusInfo } from "../../Services/Api/CoronaAnalytic/Requests";
 
 import Loading from "../../Components/Loading";
 import Filter from "../../Components/Filter";
@@ -31,9 +31,9 @@ export default function Home() {
     setLoading(true);
     async function fetchData() {
       try {
-        const responseGlobalInfo = await fetchGlobalInfo();
+        const responseVirusInfo = await fetchVirusInfo();
         setLoading(false);
-        setInfos(responseGlobalInfo);
+        setInfos(responseVirusInfo);
       } catch (err) {
         console.log(err);
       }
@@ -41,22 +41,30 @@ export default function Home() {
 
     fetchData();
     setRefresh(false);
-  }, [refresh]);
+
+    fetch("https://coronavirus.com.br:2096/total")
+      .then(res => res.json())
+      .then(data => console.log(data));
+  }, [refresh === true]);
 
   function _changeOrderCards(order) {
     switch (order) {
       case "az":
-        setFilteredInfo(infos.sort((a, b) => (a.country > b.country ? 1 : -1)));
+        console.log(infos.brazil.values);
+        setFilteredInfo(
+          infos.brazil.values.sort((a, b) => (a.state > b.state ? 1 : -1))
+        );
         break;
       case "cases":
-        setFilteredInfo(infos.sort((a, b) => (a.cases < b.cases ? 1 : -1)));
+        console.log(infos.brazil.values);
+        setFilteredInfo(
+          infos.brazil.values.sort((a, b) => (a.cases < b.cases ? 1 : -1))
+        );
         break;
       case "deaths":
-        setFilteredInfo(infos.sort((a, b) => (a.deaths < b.deaths ? 1 : -1)));
-        break;
-      case "recovered":
+        console.log(infos.brazil.values);
         setFilteredInfo(
-          infos.sort((a, b) => (a.recovered < b.recovered ? 1 : -1))
+          infos.brazil.values.sort((a, b) => (a.deaths < b.deaths ? 1 : -1))
         );
         break;
       default:
@@ -78,10 +86,12 @@ export default function Home() {
 
     let inputRefValue = inputRef.current.value;
 
+    console.log(inputRefValue);
+
     let arrInfos = [];
 
-    infos.map(info => {
-      if (RegExp(inputRefValue, "i").test(info.country)) {
+    infos.brazil.values.map(info => {
+      if (RegExp(inputRefValue, "i").test(info.state)) {
         arrInfos.push(info);
       }
     });
@@ -96,11 +106,7 @@ export default function Home() {
       </Header>
 
       <FlexContainer>
-        <Filter
-          handleChange={handleChangeFilter}
-          active={filterActive}
-          countries={true}
-        />
+        <Filter handleChange={handleChangeFilter} active={filterActive} />
 
         {infos?.brazil && (
           <Status>
@@ -115,30 +121,36 @@ export default function Home() {
       <Container>
         {filteredInfo?.map((info, key) => (
           <Card
-            key={key + crypto.getRandomValues(new Uint32Array(1))[0] + ""}
-            title={info.country}
+            key={
+              info.uid +
+              key +
+              crypto.getRandomValues(new Uint32Array(1))[0] +
+              ""
+            }
+            title={info.state}
             broadcast={info.broadcast}
             cases={info.cases}
-            todayCases={info.todayCases}
             deaths={info.deaths}
-            todayDeaths={info.todayDeaths}
             suspects={info.suspects}
-            recovered={info.recovered}
+            refuses={info.refuses}
           />
         ))}
+
         {!filteredInfo.length &&
-          !infos.brazil &&
-          infos.map((info, key) => (
+          infos?.brazil?.values.map((info, key) => (
             <Card
-              key={key + crypto.getRandomValues(new Uint32Array(1))[0] + ""}
-              title={info.country}
+              key={
+                info.uid +
+                key +
+                crypto.getRandomValues(new Uint32Array(1))[0] +
+                ""
+              }
+              title={info.state}
               broadcast={info.broadcast}
               cases={info.cases}
-              todayCases={info.todayCases}
               deaths={info.deaths}
-              todayDeaths={info.todayDeaths}
               suspects={info.suspects}
-              recovered={info.recovered}
+              refuses={info.refuses}
             />
           ))}
       </Container>

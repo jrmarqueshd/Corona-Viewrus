@@ -109,6 +109,10 @@ export const CardTitle = styled.h2`
   margin-bottom: 15px;
   text-transform: uppercase;
   flex: 1;
+  min-height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const InfosWrapper = styled.div`
@@ -134,7 +138,15 @@ export const InfosLabel = styled.span`
 `;
 
 export const Infos = styled.p`
-  display: block;
+  display: flex;
+  align-items: center;
   font-size: 18px;
   font-weight: 200;
+`;
+
+export const DetailsButton = styled.span`
+  cursor: pointer;
+  display: block;
+  font-size: 14px;
+  text-align: right;
 `;
