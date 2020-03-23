@@ -15,6 +15,7 @@ import Loading from "../../Components/Loading";
 import Filter from "../../Components/Filter";
 import Form from "../../Components/Form";
 import Card from "../../Components/Card";
+import ResumeCases from "../../Components/ResumeCases";
 import DetailsCountry from "../../Components/DetailsCountry";
 import VideoModal from "../../Components/VideoModal";
 
@@ -27,7 +28,6 @@ import {
   Title,
   RefreshButton,
 } from "./styles";
-import ResumeCases from "../../Components/ResumeCases";
 
 export default function Home() {
   const [infos, setInfos] = useState([]);
@@ -88,11 +88,10 @@ export default function Home() {
   function getGeolocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
-        console.log(position);
+        // console.log(position);
       });
       console.log("autorizado");
     } else {
-      // x.innerHTML = "Geolocation is not supported by this browser.";
       console.log("não autorizado");
     }
   }
@@ -219,7 +218,7 @@ export default function Home() {
         />
 
         {resumeTotalsInfos.length !== 0 && (
-          <ResumeCases data={resumeTotalsInfos} />
+          <ResumeCases data={resumeTotalsInfos.data[0]} />
         )}
       </FlexContainer>
 

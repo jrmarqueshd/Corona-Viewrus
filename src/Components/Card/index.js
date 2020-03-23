@@ -1,5 +1,7 @@
 import React from "react";
 
+import AddingFloatPointInValue from "../../Utils/AddingFloatPointInValue";
+
 import {
   CardWrapper,
   CardItem,
@@ -19,7 +21,6 @@ export default function Card({
   deaths = "",
   todayDeaths = "",
   suspects = "",
-  refuses = "",
   recovered = "",
   critical = "",
   hiddenDetails = false,
@@ -35,56 +36,49 @@ export default function Card({
             {cases && (
               <EachInfo>
                 <InfosLabel>Casos</InfosLabel>
-                <Infos>{cases}</Infos>
+                <Infos>{AddingFloatPointInValue(cases + "")}</Infos>
               </EachInfo>
             )}
 
             {todayCases !== "" && (
               <EachInfo>
                 <InfosLabel>Casos Hoje</InfosLabel>
-                <Infos>{todayCases}</Infos>
+                <Infos>{AddingFloatPointInValue(todayCases + "")}</Infos>
               </EachInfo>
             )}
 
             {deaths !== "" && (
               <EachInfo>
                 <InfosLabel>Mortes</InfosLabel>
-                <Infos>{deaths}</Infos>
+                <Infos>{AddingFloatPointInValue(deaths + "")}</Infos>
               </EachInfo>
             )}
 
             {todayDeaths !== "" && (
               <EachInfo>
                 <InfosLabel>Mortes Hoje</InfosLabel>
-                <Infos>{todayDeaths}</Infos>
+                <Infos>{AddingFloatPointInValue(todayDeaths + "")}</Infos>
               </EachInfo>
             )}
 
             {suspects !== "" && (
               <EachInfo>
                 <InfosLabel>Suspeitas</InfosLabel>
-                <Infos>{suspects}</Infos>
-              </EachInfo>
-            )}
-
-            {refuses !== "" && (
-              <EachInfo>
-                <InfosLabel>Recusas</InfosLabel>
-                <Infos>{refuses}</Infos>
+                <Infos>{AddingFloatPointInValue(suspects + "")}</Infos>
               </EachInfo>
             )}
 
             {recovered !== "" && (
               <EachInfo>
                 <InfosLabel>Curados</InfosLabel>
-                <Infos>{recovered}</Infos>
+                <Infos>{AddingFloatPointInValue(recovered + "")}</Infos>
               </EachInfo>
             )}
 
             {critical !== "" && (
               <EachInfo>
                 <InfosLabel>Casos de entubamentos</InfosLabel>
-                <Infos>{critical}</Infos>
+                <Infos>{AddingFloatPointInValue(critical + "")}</Infos>
               </EachInfo>
             )}
           </InfosWrapper>

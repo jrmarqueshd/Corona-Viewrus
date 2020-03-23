@@ -9,15 +9,15 @@ export default function ResumeCases({ data }) {
     <ResumeCasesWrapper>
       <CardResume className="-yellow">
         <Title>Total de Casos</Title>
-        <Amount>{AddingFloatPointInValue(1000000 + "")}</Amount>
+        <Amount>{AddingFloatPointInValue(data.totalInfecteds + "")}</Amount>
       </CardResume>
       <CardResume className="-red">
         <Title>Total de Mortes</Title>
-        <Amount>{AddingFloatPointInValue(5000 + "")}</Amount>
+        <Amount>{AddingFloatPointInValue(data.totalDeaths + "")}</Amount>
       </CardResume>
       <CardResume className="-green">
         <Title>Total de Curados</Title>
-        <Amount>{AddingFloatPointInValue(995000 + "")}</Amount>
+        <Amount>{AddingFloatPointInValue(data.totalSurvivors + "")}</Amount>
       </CardResume>
     </ResumeCasesWrapper>
   );
