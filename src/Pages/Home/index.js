@@ -41,11 +41,19 @@ export default function Home() {
   const [thisTitle, setThisTitle] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [openVideoModal, setOpenVideoModal] = useState(true);
+  const [favoritesCountries, setFavoritesCountries] = useState([]);
 
   const inputRef = useRef(null);
 
   useEffect(() => {
     getGeolocation();
+  }, []);
+
+  useEffect(() => {
+    if (!localStorage.getItem("favorites_countries")) return;
+    let _favorites = localStorage.getItem("favorites_countries").split(",");
+
+    setFavoritesCountries(_favorites);
   }, []);
 
   useEffect(() => {
@@ -179,6 +187,18 @@ export default function Home() {
     return toast(message);
   }
 
+  function handleFavorite({ currentTarget: { id } }) {
+    if (!favoritesCountries.includes(id)) {
+      setFavoritesCountries([...favoritesCountries, id]);
+    } else {
+      favoritesCountries.splice(favoritesCountries.indexOf(id), 1);
+    }
+
+    setTimeout(() => {
+      localStorage.setItem("favorites_countries", favoritesCountries);
+    }, 1000);
+  }
+
   function handleChangeFilter({ currentTarget: { id } }) {
     setFilterActive(id);
     _changeOrderCards(id);
@@ -230,11 +250,14 @@ export default function Home() {
             onClick={() => {
               handleShowDetails(info.country);
             }}
+            onFavorite={handleFavorite}
             key={info._id}
+            id={info._id}
             title={info.country}
             cases={info.totalInfecteds}
             deaths={info.totalDeaths}
             recovered={info.totalSurvivors}
+            favorite={favoritesCountries.includes(info._id) ? true : false}
           />
         ))}
         {!filteredInfo.length &&
@@ -243,11 +266,14 @@ export default function Home() {
               onClick={() => {
                 handleShowDetails(info.country);
               }}
+              onFavorite={handleFavorite}
               key={info._id}
+              id={info._id}
               title={info.country}
               cases={info.totalInfecteds}
               deaths={info.totalDeaths}
               recovered={info.totalSurvivors}
+              favorite={favoritesCountries.includes(info._id) ? true : false}
             />
           ))}
       </Container>

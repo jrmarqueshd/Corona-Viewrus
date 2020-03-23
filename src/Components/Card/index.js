@@ -1,5 +1,7 @@
 import React from "react";
 
+import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
+
 import AddingFloatPointInValue from "../../Utils/AddingFloatPointInValue";
 
 import {
@@ -11,6 +13,7 @@ import {
   Infos,
   InfosLabel,
   DetailsButton,
+  Favorite,
 } from "./style";
 
 export default function Card({
@@ -26,9 +29,15 @@ export default function Card({
   hiddenDetails = false,
   className,
   onClick,
+  onFavorite,
+  id,
 }) {
   return (
-    <CardWrapper className={`${favorite ? "-live-on" : "-live-off"}`}>
+    <CardWrapper>
+      <Favorite id={id} onClick={onFavorite}>
+        {!favorite ? <MdFavoriteBorder /> : <MdFavorite className="colorful" />}
+      </Favorite>
+
       <CardItem className={className}>
         <CardItem className={className}>
           <CardTitle>{title}</CardTitle>

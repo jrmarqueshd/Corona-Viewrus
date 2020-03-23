@@ -35,7 +35,7 @@ export const CardResume = styled.div`
     border-color: #ffff00;
   }
   &.-green {
-    border-color: #00ff00;
+    border-color: #006400;
   }
 
   @media screen and (min-width: 600px) {
