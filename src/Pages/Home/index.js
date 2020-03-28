@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  useMemo,
+  useCallback,
+} from "react";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -47,22 +53,14 @@ function Home() {
 
   useEffect(() => {
     getGeolocation();
+
+    if (!localStorage.getItem("fav_countrys")) return;
+    setFavoritesCountries(getActuallyFavorites);
   }, []);
 
   useEffect(() => {
-    if (!favoritesCountries.length) return;
-
     localStorage.setItem("fav_countrys", favoritesCountries);
   }, [favoritesCountries]);
-
-  useEffect(() => {
-    if (!localStorage.getItem("fav_countrys")) return;
-
-    let _favorites = localStorage.getItem("fav_countrys");
-    _favorites = _favorites.length > 1 ? _favorites.split(",") : [_favorites];
-
-    setFavoritesCountries(_favorites);
-  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -71,6 +69,23 @@ function Home() {
     fetchResumeTotals();
     handleReminderVideo();
   }, [refresh]);
+
+  const getActuallyFavorites = useMemo(() => {
+    let _favorites = localStorage.getItem("fav_countrys");
+    _favorites = _favorites.length > 1 ? _favorites.split(",") : [_favorites];
+
+    return _favorites;
+  }, []);
+
+  const HeaderCallback = useCallback(
+    () => (
+      <Header>
+        <Title>Corona Viewrus</Title>
+        <Form handleSubmit={handleSubmit} ref={inputRef} />
+      </Header>
+    ),
+    [inputRef]
+  );
 
   async function fetchData() {
     try {
@@ -235,10 +250,7 @@ function Home() {
 
       <VideoModal open={openVideoModal} close={_closeModal} />
 
-      <Header>
-        <Title>Corona Viewrus</Title>
-        <Form handleSubmit={handleSubmit} ref={inputRef} />
-      </Header>
+      <HeaderCallback />
 
       <FlexContainer>
         <Filter
