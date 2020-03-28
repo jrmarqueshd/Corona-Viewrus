@@ -52,6 +52,7 @@ export default function DetailsCountry({
           <Loading />
         ) : (
           <Card
+            style={{ margin: "0 auto", maxWidth: "340px" }}
             title={title}
             favorite={false}
             cases={cases}

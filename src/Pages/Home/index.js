@@ -1,5 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -21,6 +24,8 @@ import VideoModal from "../../Components/VideoModal";
 
 import TranslateCountryName from "../../Utils/TranslateCountryName";
 
+import addInfos from "../../Store/Actions/addInfos";
+
 import {
   Container,
   FlexContainer,
@@ -29,7 +34,7 @@ import {
   RefreshButton,
 } from "./styles";
 
-export default function Home() {
+function Home() {
   const [infos, setInfos] = useState([]);
   const [resumeTotalsInfos, setResumeTotalsInfos] = useState([]);
   const [detailsInfo, setDetailsInfo] = useState({});
@@ -286,3 +291,11 @@ export default function Home() {
     </>
   );
 }
+
+const mapStateToProps = state => ({
+  infos: state.infos,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(addInfos, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

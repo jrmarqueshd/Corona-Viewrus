@@ -1,18 +1,23 @@
 import React from "react";
 
-import Global from "./Assets/Styles/Global";
+import { Provider } from "react-redux";
 
-// import Menu from "./Components/Menu";
+import { PersistGate } from "redux-persist/integration/react";
 
 import Routes from "./Routes";
 
+import { store, persistor } from "./Store";
+
+import Global from "./Assets/Styles/Global";
+
 function App() {
   return (
-    <>
-      <Global />
-      {/* <Menu /> */}
-      <Routes />
-    </>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Global />
+        <Routes />
+      </PersistGate>
+    </Provider>
   );
 }
 

@@ -30,10 +30,11 @@ export default function Card({
   className,
   onClick,
   onFavorite,
+  style,
   id,
 }) {
   return (
-    <CardWrapper>
+    <CardWrapper style={style}>
       <Favorite id={id} onClick={onFavorite}>
         {!favorite ? <MdFavoriteBorder /> : <MdFavorite className="colorful" />}
       </Favorite>
