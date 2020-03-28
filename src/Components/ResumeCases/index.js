@@ -2,22 +2,60 @@ import React from "react";
 
 import AddingFloatPointInValue from "../../Utils/AddingFloatPointInValue";
 
-import { ResumeCasesWrapper, CardResume, Title, Amount } from "./style";
+import {
+  ResumeCasesWrapper,
+  CardResume,
+  Title,
+  Amount,
+  LastAmount,
+  ShortTitle,
+} from "./style";
 
-export default function ResumeCases({ data }) {
+export default function ResumeCases({
+  data: { totalDeaths, totalInfecteds, totalSurvivors },
+  retrieves: {
+    totalDeaths: deaths,
+    totalInfecteds: infecteds,
+    totalSurvivors: survivors,
+  },
+}) {
   return (
     <ResumeCasesWrapper>
       <CardResume className="-yellow">
         <Title>Total de Casos</Title>
-        <Amount>{AddingFloatPointInValue(data.totalInfecteds + "")}</Amount>
+        <Amount>{AddingFloatPointInValue(totalInfecteds + "")}</Amount>
+        {infecteds && infecteds !== totalInfecteds ? (
+          <LastAmount>
+            +{AddingFloatPointInValue(totalInfecteds - infecteds + "")}{" "}
+            <ShortTitle>desde sua última visita</ShortTitle>
+          </LastAmount>
+        ) : (
+          ""
+        )}
       </CardResume>
       <CardResume className="-red">
         <Title>Total de Mortes</Title>
-        <Amount>{AddingFloatPointInValue(data.totalDeaths + "")}</Amount>
+        <Amount>{AddingFloatPointInValue(totalDeaths + "")}</Amount>
+        {deaths && deaths !== totalDeaths ? (
+          <LastAmount>
+            +{AddingFloatPointInValue(totalDeaths - deaths + "")}{" "}
+            <ShortTitle>desde sua última visita</ShortTitle>
+          </LastAmount>
+        ) : (
+          ""
+        )}
       </CardResume>
       <CardResume className="-green">
         <Title>Total de Curados</Title>
-        <Amount>{AddingFloatPointInValue(data.totalSurvivors + "")}</Amount>
+        <Amount>{AddingFloatPointInValue(totalSurvivors + "")}</Amount>
+        {survivors && survivors !== totalSurvivors ? (
+          <LastAmount>
+            +{AddingFloatPointInValue(totalSurvivors - survivors + "")}{" "}
+            <ShortTitle>desde sua última visita</ShortTitle>
+          </LastAmount>
+        ) : (
+          ""
+        )}
       </CardResume>
     </ResumeCasesWrapper>
   );

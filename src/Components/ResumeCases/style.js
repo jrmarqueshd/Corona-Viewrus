@@ -38,7 +38,7 @@ export const CardResume = styled.div`
     border-color: #006400;
   }
 
-  @media screen and (min-width: 600px) {
+  @media screen and (min-width: 768px) {
     flex: 1;
 
     &:not(:first-child) {
@@ -76,4 +76,16 @@ export const Title = styled.h3`
 
 export const Amount = styled.p`
   font-size: 30px;
+`;
+
+export const LastAmount = styled.span`
+  font-size: 14px;
+  font-weight: bold;
+  width: 100%;
+`;
+
+export const ShortTitle = styled.span`
+  font-size: 8px;
+  text-transform: uppercase;
+  color: #000;
 `;

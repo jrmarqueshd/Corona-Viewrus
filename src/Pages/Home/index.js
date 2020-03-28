@@ -26,6 +26,7 @@ import DetailsCountry from "../../Components/DetailsCountry";
 import VideoModal from "../../Components/VideoModal";
 
 import TranslateCountryName from "../../Utils/TranslateCountryName";
+import isEquivalent from "../../Utils/CompareIfObjIsSame";
 
 import {
   Container,
@@ -38,6 +39,7 @@ import {
 function Home() {
   const [infos, setInfos] = useState([]);
   const [resumeTotalsInfos, setResumeTotalsInfos] = useState([]);
+  const [retInfo, setRetInfo] = useState({});
   const [detailsInfo, setDetailsInfo] = useState({});
   const [filteredInfo, setFilteredInfo] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -54,9 +56,13 @@ function Home() {
   useEffect(() => {
     getGeolocation();
 
-    if (!localStorage.getItem("fav_countrys")) return;
     setFavoritesCountries(getActuallyFavorites);
   }, []);
+
+  useEffect(() => {
+    retrievingInfo();
+    saveShortInfos();
+  }, [resumeTotalsInfos]);
 
   useEffect(() => {
     localStorage.setItem("fav_countrys", favoritesCountries);
@@ -72,20 +78,13 @@ function Home() {
 
   const getActuallyFavorites = useMemo(() => {
     let _favorites = localStorage.getItem("fav_countrys");
+
+    if (!_favorites) return [];
+
     _favorites = _favorites.length > 1 ? _favorites.split(",") : [_favorites];
 
     return _favorites;
   }, []);
-
-  const HeaderCallback = useCallback(
-    () => (
-      <Header>
-        <Title>Corona Viewrus</Title>
-        <Form handleSubmit={handleSubmit} ref={inputRef} />
-      </Header>
-    ),
-    [inputRef]
-  );
 
   async function fetchData() {
     try {
@@ -156,7 +155,6 @@ function Home() {
       default:
         break;
     }
-    // setLoading(false); //remove event vinculed on search click
   }
 
   function _searchCountry() {
@@ -185,6 +183,28 @@ function Home() {
   function _closeModal() {
     setOpenModal(false);
     setOpenVideoModal(false);
+  }
+
+  function saveShortInfos() {
+    console.log("entrou na função");
+    if (resumeTotalsInfos.length === 0) return;
+    console.log("passou de resume");
+    if (isEquivalent(resumeTotalsInfos.data[0], retInfo)) return;
+    console.log("obj é diferente");
+
+    localStorage.setItem(
+      "short_infos",
+      JSON.stringify(resumeTotalsInfos?.data?.[0])
+    );
+  }
+
+  function retrievingInfo() {
+    let shortInfos = localStorage.getItem("short_infos");
+    if (!shortInfos) return;
+
+    shortInfos = JSON.parse(shortInfos);
+
+    setRetInfo(shortInfos);
   }
 
   function handleReminderVideo() {
@@ -250,7 +270,10 @@ function Home() {
 
       <VideoModal open={openVideoModal} close={_closeModal} />
 
-      <HeaderCallback />
+      <Header>
+        <Title>Corona Viewrus</Title>
+        <Form handleSubmit={handleSubmit} ref={inputRef} />
+      </Header>
 
       <FlexContainer>
         <Filter
@@ -260,7 +283,7 @@ function Home() {
         />
 
         {resumeTotalsInfos.length !== 0 && (
-          <ResumeCases data={resumeTotalsInfos.data[0]} />
+          <ResumeCases data={resumeTotalsInfos.data[0]} retrieves={retInfo} />
         )}
       </FlexContainer>
 
