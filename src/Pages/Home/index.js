@@ -1,8 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -23,8 +20,6 @@ import DetailsCountry from "../../Components/DetailsCountry";
 import VideoModal from "../../Components/VideoModal";
 
 import TranslateCountryName from "../../Utils/TranslateCountryName";
-
-import addInfos from "../../Store/Actions/addInfos";
 
 import {
   Container,
@@ -55,8 +50,16 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    if (!localStorage.getItem("favorites_countries")) return;
-    let _favorites = localStorage.getItem("favorites_countries").split(",");
+    if (!favoritesCountries.length) return;
+
+    localStorage.setItem("fav_countrys", favoritesCountries);
+  }, [favoritesCountries]);
+
+  useEffect(() => {
+    if (!localStorage.getItem("fav_countrys")) return;
+
+    let _favorites = localStorage.getItem("fav_countrys");
+    _favorites = _favorites.length > 1 ? _favorites.split(",") : [_favorites];
 
     setFavoritesCountries(_favorites);
   }, []);
@@ -198,12 +201,12 @@ function Home() {
     if (!favoritesCountries.includes(id)) {
       setFavoritesCountries([...favoritesCountries, id]);
     } else {
-      favoritesCountries.splice(favoritesCountries.indexOf(id), 1);
-    }
+      const actuallyFavorites = favoritesCountries.filter(
+        country => country !== id
+      );
 
-    setTimeout(() => {
-      localStorage.setItem("favorites_countries", favoritesCountries);
-    }, 1000);
+      setFavoritesCountries(actuallyFavorites);
+    }
   }
 
   function handleChangeFilter({ currentTarget: { id } }) {
@@ -294,10 +297,4 @@ function Home() {
   );
 }
 
-const mapStateToProps = state => ({
-  infos: state.infos,
-});
-
-const mapDispatchToProps = dispatch => bindActionCreators(addInfos, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;
