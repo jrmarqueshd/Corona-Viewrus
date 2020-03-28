@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  useState,
-  useRef,
-  useMemo,
-  useCallback,
-} from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -186,11 +180,13 @@ function Home() {
   }
 
   function saveShortInfos() {
-    console.log("entrou na função");
     if (resumeTotalsInfos.length === 0) return;
-    console.log("passou de resume");
+
+    const date = new Date().getDate() + "";
+
+    if (date === localStorage.getItem("reminder")) return;
+
     if (isEquivalent(resumeTotalsInfos.data[0], retInfo)) return;
-    console.log("obj é diferente");
 
     localStorage.setItem(
       "short_infos",
