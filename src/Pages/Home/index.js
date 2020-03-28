@@ -144,6 +144,8 @@ function Home() {
   function _searchCountry() {
     let inputRefValue = inputRef.current.value;
 
+    if (inputRefValue === "") return inputRef.current.focus();
+
     let arrInfos = [];
 
     infos.data.map(info => {
