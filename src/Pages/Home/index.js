@@ -18,6 +18,7 @@ import Card from "../../Components/Card";
 import ResumeCases from "../../Components/ResumeCases";
 import DetailsCountry from "../../Components/DetailsCountry";
 import VideoModal from "../../Components/VideoModal";
+import Pagination from "../../Components/Pagination";
 
 import TranslateCountryName from "../../Utils/TranslateCountryName";
 import isEquivalent from "../../Utils/CompareIfObjIsSame";
@@ -32,6 +33,7 @@ import {
 
 function Home() {
   const [infos, setInfos] = useState([]);
+  const [paginationInfos, setPaginationInfos] = useState([]);
   const [resumeTotalsInfos, setResumeTotalsInfos] = useState([]);
   const [retInfo, setRetInfo] = useState({});
   const [detailsInfo, setDetailsInfo] = useState({});
@@ -49,7 +51,6 @@ function Home() {
 
   useEffect(() => {
     getGeolocation();
-
     setFavoritesCountries(getActuallyFavorites);
   }, []);
 
@@ -69,6 +70,11 @@ function Home() {
     fetchResumeTotals();
     handleReminderVideo();
   }, [refresh]);
+
+  useEffect(() => {
+    handleAmountShowCards();
+    console.log(infos.data);
+  }, [infos]);
 
   const getActuallyFavorites = useMemo(() => {
     let _favorites = localStorage.getItem("fav_countrys");
@@ -240,6 +246,18 @@ function Home() {
     }
   }
 
+  function handleAmountShowCards(page = 0) {
+    if (infos.length === 0) return;
+
+    let _pages = infos?.data?.slice(page, page + 12);
+
+    setPaginationInfos(_pages);
+  }
+
+  function handlePagination({ selected }) {
+    handleAmountShowCards(selected + 11);
+  }
+
   function handleChangeFilter({ currentTarget: { id } }) {
     setFilterActive(id);
     _changeOrderCards(id);
@@ -302,7 +320,7 @@ function Home() {
           />
         ))}
         {!filteredInfo.length &&
-          infos?.data?.map(info => (
+          paginationInfos?.map(info => (
             <Card
               onClick={() => {
                 handleShowDetails(info.country);
@@ -324,6 +342,11 @@ function Home() {
       </RefreshButton>
 
       <ToastContainer autoClose={10000} />
+
+      <Pagination
+        totalPages={infos?.data?.length}
+        handlePagination={handlePagination}
+      />
     </>
   );
 }

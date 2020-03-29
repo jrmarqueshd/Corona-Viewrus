@@ -1,5 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
+import { ColorPurple } from "./Variables";
+
 const Global = createGlobalStyle`
   *{
     padding: 0;
@@ -7,10 +9,12 @@ const Global = createGlobalStyle`
     box-sizing: border-box !important;
     outline: transparent;
     font-family: Arial, Helvetica, sans-serif;
+    list-style: none;
+    color: inherit;
   }
 
   body{
-    background-color: #8140ff;
+    background-color: ${ColorPurple};
   }
 
   .ReactModal__Overlay {
