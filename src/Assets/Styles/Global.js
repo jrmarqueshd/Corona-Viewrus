@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-import { ColorPurple } from "./Variables";
+import { ThemeColor } from "./Variables";
 
 const Global = createGlobalStyle`
   *{
@@ -14,7 +14,7 @@ const Global = createGlobalStyle`
   }
 
   body{
-    background-color: ${ColorPurple};
+    background-color: ${ThemeColor};
   }
 
   .ReactModal__Overlay {

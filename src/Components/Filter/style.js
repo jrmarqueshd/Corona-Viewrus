@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { ThemeColor, White } from "../../Assets/Styles/Variables";
+
 export const FilterWrapper = styled.div`
   margin: 20px auto 15px;
   padding: 0 30px;
@@ -19,7 +21,7 @@ export const Option = styled.div`
   position: relative;
   margin-top: 6px;
   padding-left: 20px;
-  color: #fff;
+  color: ${White};
   font-family: Arial, Helvetica, sans-serif;
   cursor: pointer;
 
@@ -29,8 +31,8 @@ export const Option = styled.div`
 
   &::before {
     content: "";
-    background-color: #fff;
-    border: 3px solid #fff;
+    background-color: ${White};
+    border: 3px solid ${White};
     border-radius: 100%;
     display: block;
     padding: 5px;
@@ -41,7 +43,7 @@ export const Option = styled.div`
 
   &.-selected {
     &::before {
-      background-color: #8140ff;
+      background-color: ${ThemeColor};
     }
   }
 

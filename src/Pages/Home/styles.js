@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { White, Gray } from "../../Assets/Styles/Variables";
+
 export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -29,7 +31,7 @@ export const FlexContainer = styled.div`
 
 export const Status = styled.p`
   font-size: 12px;
-  color: #fff;
+  color: ${White};
   margin: 15px auto 0;
   padding-left: 30px;
   padding-right: 30px;
@@ -61,7 +63,7 @@ export const Header = styled.header`
 export const Title = styled.h1`
   font-family: Arial, Helvetica, sans-serif;
   font-size: 40px;
-  color: #fff;
+  color: ${White};
   margin-top: 30px;
   margin-bottom: 30px;
   text-align: center;
@@ -79,9 +81,9 @@ export const RefreshButton = styled.button`
   border-radius: 100%;
   font-size: 20px;
   padding: 15px;
-  color: #fff;
-  background-color: #333;
-  border: 2px solid #333;
+  color: ${White};
+  background-color: ${Gray};
+  border: 2px solid ${Gray};
   transition: all 300ms ease;
   cursor: pointer;
   position: fixed;

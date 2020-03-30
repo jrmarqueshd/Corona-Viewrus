@@ -1,7 +1,7 @@
 import React from "react";
 
 import { FaBriefcaseMedical } from "react-icons/fa";
-import { GiDeathSkull, GiMedicines } from "react-icons/gi";
+import { GiDeathSkull, GiMedicines, GiInfestedMass } from "react-icons/gi";
 import { TiSortAlphabeticallyOutline } from "react-icons/ti";
 
 import { FilterWrapper, Option } from "./style";
@@ -14,8 +14,13 @@ const optionsTemplate = [
   },
   {
     id: "cases",
-    icon: <FaBriefcaseMedical />,
+    icon: <GiInfestedMass />,
     label: "Casos",
+  },
+  {
+    id: "currentCases",
+    icon: <FaBriefcaseMedical />,
+    label: "Casos em andamento",
   },
   {
     id: "deaths",

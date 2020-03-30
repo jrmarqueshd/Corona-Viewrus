@@ -28,6 +28,7 @@ import Pagination from "../../Components/Pagination";
 
 import TranslateCountryName from "../../Utils/TranslateCountryName";
 import isEquivalent from "../../Utils/CompareIfObjIsSame";
+import calculateCurrentCases from "../../Utils/CalculateCurrentCases";
 
 import {
   Container,
@@ -52,6 +53,7 @@ function Home() {
   const [openModal, setOpenModal] = useState(false);
   const [openVideoModal, setOpenVideoModal] = useState(true);
   const [favoritesCountries, setFavoritesCountries] = useState([]);
+  const [cardsPerPage] = useState(12);
 
   const inputRef = useRef(null);
 
@@ -133,34 +135,59 @@ function Home() {
   }
 
   function _changeOrderCards(order) {
-    switch (order) {
-      case "az":
-        setFilteredInfo(
-          infos?.data?.sort((a, b) => (a.country > b.country ? 1 : -1))
-        );
-        break;
-      case "cases":
-        setFilteredInfo(
-          infos?.data?.sort((a, b) =>
-            a.totalInfecteds < b.totalInfecteds ? 1 : -1
-          )
-        );
-        break;
-      case "deaths":
-        setFilteredInfo(
-          infos?.data?.sort((a, b) => (a.totalDeaths < b.totalDeaths ? 1 : -1))
-        );
-        break;
-      case "recovered":
-        setFilteredInfo(
-          infos?.data?.sort((a, b) =>
-            a.totalSurvivors < b.totalSurvivors ? 1 : -1
-          )
-        );
-        break;
-      default:
-        break;
-    }
+    setLoading(true);
+
+    setTimeout(() => {
+      switch (order) {
+        case "az":
+          setFilteredInfo(
+            infos?.data?.sort((a, b) => (a.country > b.country ? 1 : -1))
+          );
+          break;
+        case "cases":
+          setFilteredInfo(
+            infos?.data?.sort((a, b) =>
+              a.totalInfecteds < b.totalInfecteds ? 1 : -1
+            )
+          );
+          break;
+        case "currentCases":
+          setFilteredInfo(
+            infos?.data?.sort((a, b) =>
+              calculateCurrentCases(
+                a.totalInfecteds,
+                a.totalDeaths,
+                a.totalSurvivors
+              ) <
+              calculateCurrentCases(
+                b.totalInfecteds,
+                b.totalDeaths,
+                b.totalSurvivors
+              )
+                ? 1
+                : -1
+            )
+          );
+          break;
+        case "deaths":
+          setFilteredInfo(
+            infos?.data?.sort((a, b) =>
+              a.totalDeaths < b.totalDeaths ? 1 : -1
+            )
+          );
+          break;
+        case "recovered":
+          setFilteredInfo(
+            infos?.data?.sort((a, b) =>
+              a.totalSurvivors < b.totalSurvivors ? 1 : -1
+            )
+          );
+          break;
+        default:
+          break;
+      }
+      setLoading(false);
+    }, 200);
   }
 
   function _searchCountry() {
@@ -254,16 +281,16 @@ function Home() {
   function handleAmountShowCards(page = 0) {
     if (infos.length === 0) return;
 
-    let _pages = infos?.data?.slice(page, page + 12);
+    let _pages = infos?.data?.slice(page, page + cardsPerPage);
 
     setPaginationInfos(_pages);
   }
 
   function handlePagination({ selected }) {
-    handleAmountShowCards(selected + 11);
+    handleAmountShowCards(selected + (cardsPerPage - 1));
   }
 
-  function handleChangeFilter({ currentTarget: { id } }) {
+  async function handleChangeFilter({ currentTarget: { id } }) {
     setFilterActive(id);
     _changeOrderCards(id);
   }
@@ -354,6 +381,7 @@ function Home() {
 
       <Pagination
         totalPages={infos?.data?.length}
+        maxItemPerPage={cardsPerPage}
         handlePagination={handlePagination}
       />
     </>

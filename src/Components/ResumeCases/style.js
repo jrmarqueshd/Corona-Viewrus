@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { CardColor, Yellow, Red, Green } from "../../Assets/Styles/Variables";
+
 export const ResumeCasesWrapper = styled.div`
   padding: 0 15px;
   margin: 15px 0;
@@ -19,7 +21,7 @@ export const CardResume = styled.div`
   box-sizing: border-box;
   border-radius: 15px;
   border-left: 5px solid;
-  background-color: #ccc;
+  background-color: ${CardColor};
   display: flex;
   flex-wrap: wrap;
   margin-top: 7.5px;
@@ -28,14 +30,14 @@ export const CardResume = styled.div`
   width: 100%;
 
   &.-red {
-    border-color: #ff0000;
+    border-color: ${Red};
   }
 
   &.-yellow {
-    border-color: #ffff00;
+    border-color: ${Yellow};
   }
   &.-green {
-    border-color: #006400;
+    border-color: ${Green};
   }
 
   @media screen and (min-width: 768px) {

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { ColorPurple } from "../../Assets/Styles/Variables";
+import { ThemeColor, CardColor } from "../../Assets/Styles/Variables";
 
 export const Container = styled.div`
   padding: 15px;
@@ -24,7 +24,7 @@ export const Container = styled.div`
         a:hover {
           border: none;
           background-color: transparent;
-          color: #ccc;
+          color: ${CardColor};
         }
       }
 
@@ -35,7 +35,7 @@ export const Container = styled.div`
           border: none;
           background-color: transparent;
           width: auto;
-          color: #ccc;
+          color: ${CardColor};
         }
       }
 
@@ -45,26 +45,26 @@ export const Container = styled.div`
 
       &.selected {
         a {
-          background-color: #ccc;
-          color: ${ColorPurple};
+          background-color: ${CardColor};
+          color: ${ThemeColor};
         }
       }
 
       a {
         border-radius: 7px;
-        border: 1px solid #ccc;
+        border: 1px solid ${CardColor};
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #ccc;
+        color: ${CardColor};
         cursor: pointer;
         height: 35px;
         width: 35px;
         transition: all 98.7ms ease;
 
         &:hover {
-          background-color: #ccc;
-          color: ${ColorPurple};
+          background-color: ${CardColor};
+          color: ${ThemeColor};
         }
       }
     }

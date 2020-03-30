@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+import {
+  ThemeColor,
+  CardColor,
+  ContentColor,
+} from "../../Assets/Styles/Variables";
+
 export const CardWrapper = styled.section`
   display: flex;
   justify-content: space-between;
@@ -20,20 +26,16 @@ export const CardWrapper = styled.section`
 
 export const CardItem = styled.div`
   box-sizing: border-box;
-  background-color: #ccc;
+  background-color: ${CardColor};
   border-radius: 15px;
   padding: 15px;
   width: 100%;
-
-  &.filtered {
-    background-color: #eee;
-  }
 `;
 
 export const CardTitle = styled.h2`
   font-size: 28px;
   font-weight: bold;
-  color: #111;
+  color: ${ContentColor};
   text-align: center;
   margin-bottom: 15px;
   text-transform: uppercase;
@@ -94,7 +96,7 @@ export const Favorite = styled.div`
     font-size: 26px;
 
     &.colorful {
-      color: #8140ff;
+      color: ${ThemeColor};
     }
   }
 `;

@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { White } from "../../Assets/Styles/Variables";
+
 export const FormWrapper = styled.form`
   position: relative;
   margin: 0 auto;
@@ -7,6 +9,7 @@ export const FormWrapper = styled.form`
 `;
 
 export const SearchInput = styled.input`
+  background-color: ${White};
   border: none;
   border-radius: 15px;
   padding: 10px 30px 10px 15px;

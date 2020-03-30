@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { CardColor, White, Gray } from "../../Assets/Styles/Variables";
+
 export const MenuItem = styled.button`
   display: flex;
   justify-content: center;
@@ -7,9 +9,9 @@ export const MenuItem = styled.button`
   border-radius: 100%;
   font-size: 20px;
   padding: 15px;
-  color: #fff;
-  background-color: #333;
-  border: 2px solid #333;
+  color: ${White};
+  background-color: ${Gray};
+  border: 2px solid ${Gray};
   transition: all 300ms ease;
   cursor: pointer;
   position: fixed;
@@ -39,8 +41,8 @@ export const MenuItem = styled.button`
 
   &.-active {
     pointer-events: none;
-    background-color: #ccc;
-    color: #333;
+    background-color: ${CardColor};
+    color: ${Gray};
   }
 
   &:hover {

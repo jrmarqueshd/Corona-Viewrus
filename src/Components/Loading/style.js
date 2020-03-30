@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { ThemeColor } from "../../Assets/Styles/Variables";
+
 export const LoadingWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -11,7 +13,7 @@ export const LoadingWrapper = styled.div`
 
   &.purple {
     svg {
-      color: #8140ff;
+      color: ${ThemeColor};
     }
   }
 
