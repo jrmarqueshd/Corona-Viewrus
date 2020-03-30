@@ -214,16 +214,16 @@ function Home() {
   }
 
   function saveShortInfos() {
-    if (new Date().getDate() == localStorage.getItem("reminder")) return;
+    setTimeout(() => {
+      retrievingInfo();
+    }, 1000);
+
+    if (new Date().getDate() + "" === localStorage.getItem("reminder")) return;
 
     localStorage.setItem(
       "short_infos",
       JSON.stringify(resumeTotalsInfos?.data?.[0])
     );
-
-    setTimeout(() => {
-      retrievingInfo();
-    }, 1000);
   }
 
   function retrievingInfo() {
