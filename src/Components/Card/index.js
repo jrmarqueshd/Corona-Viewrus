@@ -1,8 +1,12 @@
 import React from "react";
 
-import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
+import { MdFavoriteBorder, MdFavorite, MdInfoOutline } from "react-icons/md";
+
+import ReactTooltip from "react-tooltip";
 
 import AddingFloatPointInValue from "../../Utils/AddingFloatPointInValue";
+
+import calculateCurrentCases from "../../Utils/CalculateCurrentCases";
 
 import {
   CardWrapper,
@@ -35,6 +39,13 @@ export default function Card({
 }) {
   return (
     <CardWrapper style={style}>
+      <ReactTooltip
+        place="right"
+        type="info"
+        effect="float"
+        multiline={true}
+        delayHide={200}
+      />
       <Favorite id={id} onClick={onFavorite}>
         {!favorite ? <MdFavoriteBorder /> : <MdFavorite className="colorful" />}
       </Favorite>
@@ -45,10 +56,22 @@ export default function Card({
           <InfosWrapper>
             {cases && (
               <EachInfo>
-                <InfosLabel>Casos</InfosLabel>
+                <InfosLabel>Total de Casos</InfosLabel>
                 <Infos>{AddingFloatPointInValue(cases + "")}</Infos>
               </EachInfo>
             )}
+
+            <EachInfo>
+              <InfosLabel>
+                Casos em <br /> Andamento{" "}
+                <MdInfoOutline data-tip="Pessoas vivas, que ainda estão em recuperação!" />
+              </InfosLabel>
+              <Infos>
+                {AddingFloatPointInValue(
+                  calculateCurrentCases(cases, deaths, recovered) + ""
+                )}
+              </Infos>
+            </EachInfo>
 
             {todayCases !== "" && (
               <EachInfo>

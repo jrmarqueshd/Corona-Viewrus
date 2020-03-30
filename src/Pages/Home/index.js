@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useRef, useMemo } from "react";
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  useMemo,
+  useCallback,
+} from "react";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -73,7 +79,6 @@ function Home() {
 
   useEffect(() => {
     handleAmountShowCards();
-    console.log(infos.data);
   }, [infos]);
 
   const getActuallyFavorites = useMemo(() => {
@@ -304,37 +309,41 @@ function Home() {
       {loading && <Loading />}
 
       <Container>
-        {filteredInfo?.map(info => (
-          <Card
-            onClick={() => {
-              handleShowDetails(info.country);
-            }}
-            onFavorite={handleFavorite}
-            key={info._id}
-            id={info._id}
-            title={info.country}
-            cases={info.totalInfecteds}
-            deaths={info.totalDeaths}
-            recovered={info.totalSurvivors}
-            favorite={favoritesCountries.includes(info._id) ? true : false}
-          />
-        ))}
-        {!filteredInfo.length &&
-          paginationInfos?.map(info => (
+        {filteredInfo?.map(
+          ({ _id, country, totalInfecteds, totalDeaths, totalSurvivors }) => (
             <Card
               onClick={() => {
-                handleShowDetails(info.country);
+                handleShowDetails(country);
               }}
               onFavorite={handleFavorite}
-              key={info._id}
-              id={info._id}
-              title={info.country}
-              cases={info.totalInfecteds}
-              deaths={info.totalDeaths}
-              recovered={info.totalSurvivors}
-              favorite={favoritesCountries.includes(info._id) ? true : false}
+              key={_id}
+              id={_id}
+              title={country}
+              cases={totalInfecteds}
+              deaths={totalDeaths}
+              recovered={totalSurvivors}
+              favorite={favoritesCountries.includes(_id) ? true : false}
             />
-          ))}
+          )
+        )}
+        {!filteredInfo.length &&
+          paginationInfos?.map(
+            ({ _id, country, totalInfecteds, totalDeaths, totalSurvivors }) => (
+              <Card
+                onClick={() => {
+                  handleShowDetails(country);
+                }}
+                onFavorite={handleFavorite}
+                key={_id}
+                id={_id}
+                title={country}
+                cases={totalInfecteds}
+                deaths={totalDeaths}
+                recovered={totalSurvivors}
+                favorite={favoritesCountries.includes(_id) ? true : false}
+              />
+            )
+          )}
       </Container>
 
       <RefreshButton onClick={handleRefresh}>

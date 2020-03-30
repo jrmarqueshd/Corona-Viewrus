@@ -62,14 +62,18 @@ export const EachInfo = styled.div`
 
 export const InfosLabel = styled.span`
   display: block;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
+
+  svg {
+    cursor: pointer;
+  }
 `;
 
 export const Infos = styled.p`
   display: flex;
   align-items: center;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 200;
 `;
 
