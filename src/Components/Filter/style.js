@@ -19,7 +19,7 @@ export const FilterWrapper = styled.div`
 export const Option = styled.div`
   display: inline-block;
   position: relative;
-  margin-top: 6px;
+  margin-top: 20px;
   padding-left: 20px;
   color: ${White};
   font-family: Arial, Helvetica, sans-serif;

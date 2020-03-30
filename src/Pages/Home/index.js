@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  useState,
-  useRef,
-  useMemo,
-  useCallback,
-} from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -29,6 +23,7 @@ import Pagination from "../../Components/Pagination";
 import TranslateCountryName from "../../Utils/TranslateCountryName";
 import isEquivalent from "../../Utils/CompareIfObjIsSame";
 import calculateCurrentCases from "../../Utils/CalculateCurrentCases";
+import RemoveSpecialChars from "../../Utils/RemoveSpecialChars";
 
 import {
   Container,
@@ -198,7 +193,7 @@ function Home() {
     let arrInfos = [];
 
     infos.data.map(info => {
-      if (RegExp(inputRefValue, "i").test(info.country)) {
+      if (RegExp(inputRefValue, "i").test(RemoveSpecialChars(info.country))) {
         arrInfos.push(info);
       }
     });
