@@ -58,12 +58,11 @@ function Home() {
   useEffect(() => {
     getGeolocation();
     setFavoritesCountries(getActuallyFavorites);
-
-    localStorage.setItem("_teste", "123");
   }, []);
 
   useEffect(() => {
-    retrievingInfo();
+    if (resumeTotalsInfos.length === 0) return;
+    if (isEquivalent(resumeTotalsInfos.data[0], retInfo)) return;
     saveShortInfos();
   }, [resumeTotalsInfos]);
 
@@ -193,23 +192,20 @@ function Home() {
   }
 
   function saveShortInfos() {
-    if (resumeTotalsInfos.length === 0) return;
-
-    const date = new Date().getDate() + "";
-
-    if (date === localStorage.getItem("reminder")) return;
-
-    if (isEquivalent(resumeTotalsInfos.data[0], retInfo)) return;
+    if (new Date().getDate() == localStorage.getItem("reminder")) return;
 
     localStorage.setItem(
       "short_infos",
       JSON.stringify(resumeTotalsInfos?.data?.[0])
     );
+
+    setTimeout(() => {
+      retrievingInfo();
+    }, 1000);
   }
 
   function retrievingInfo() {
     let shortInfos = localStorage.getItem("short_infos");
-    if (!shortInfos) return;
 
     shortInfos = JSON.parse(shortInfos);
 
@@ -224,7 +220,9 @@ function Home() {
       date.getDate() !== Number(localStorage.getItem("reminder"))
     ) {
       setOpenVideoModal(true);
-      localStorage.setItem("reminder", date.getDate() + "");
+      setTimeout(() => {
+        localStorage.setItem("reminder", date.getDate() + "");
+      }, 10000);
     } else {
       setOpenVideoModal(false);
     }

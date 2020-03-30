@@ -1,4 +1,7 @@
 export default function isEquivalent(a, b) {
+  if (a === undefined) return false;
+  if (b === undefined) return false;
+
   var aProps = Object.getOwnPropertyNames(a);
   var bProps = Object.getOwnPropertyNames(b);
 
