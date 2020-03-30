@@ -58,6 +58,8 @@ function Home() {
   useEffect(() => {
     getGeolocation();
     setFavoritesCountries(getActuallyFavorites);
+
+    localStorage.setItem("_teste", "123");
   }, []);
 
   useEffect(() => {
